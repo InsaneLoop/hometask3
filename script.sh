@@ -5,20 +5,21 @@ sudo yum install mc vim git httpd cronie -y
 sudo service httpd start 
 sudo systemctl enable httpd 
 
+echo '#!/bin/bash' >> /root/sysinfo.sh
 #Виводить поточну дату
-echo 'date >> /var/log/sysinfo'
+echo 'date >> /var/log/sysinfo' >> /root/sysinfo.sh
 #Інформація про вхідні підключення
-echo 'w >> /var/log/sysinfo' 
+echo 'w >> /var/log/sysinfo'  >> /root/sysinfo.sh
 #Інформація про використання пам`яті
-echo 'free -m >> /var/log/sysinfo' 
+echo 'free -m >> /var/log/sysinfo'  >> /root/sysinfo.sh
 #Інформація про використання місця на диску
-echo 'df -h >> /var/log/sysinfo' 
+echo 'df -h >> /var/log/sysinfo'  >> /root/sysinfo.sh
 #Інформацію про відкриті мережеві порти та програми
-echo 'ss -tulpn >> /var/log/sysinfo' 
+echo 'ss -tulpn >> /var/log/sysinfo'  >> /root/sysinfo.sh
 #Ping до "ukr.net"
-echo 'ping -c1 -w1 ukr.net >> /var/log/sysinfo' 
+echo 'ping -c1 -w1 ukr.net >> /var/log/sysinfo'  >> /root/sysinfo.sh
 
-echo 'find / -type f -perm /4000 >> /var/log/sysinfo' >> /root/sysinfo.sh
+echo 'find / -type f -perm -4000 -exec ls -l {} \; >> /var/log/sysinfo' >> /root/sysinfo.sh
  
 #Робить скріпт можливим для запуску
 chmod -v +x /root/sysinfo.sh &>/tmp/chmod.log 
