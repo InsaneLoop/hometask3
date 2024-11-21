@@ -27,3 +27,7 @@ chmod -v +x /root/sysinfo.sh &>/tmp/chmod.log
 echo ' * * * * 1-5 root /root/sysinfo.sh' >> /etc/crontab 
  
 sudo service crond restart
+
+snap install amazon-ssm-agent --classic
+systemctl start amazon-ssm-agent
+systemctl enable amazon-ssm-agent
